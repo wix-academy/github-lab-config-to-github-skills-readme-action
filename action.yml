@@ -5,10 +5,14 @@ inputs:
     description: 'config.yml path'
     required: true
     default: 'config.yml'
-  coursedetailsfile: # course-details.md
+  course-details-file: # course-details.md
     description: 'course-details.md path'
     required: true
     default: 'course-details.md'
+  readme-file: # README.md
+    description: 'README.md to generate'
+    required: true
+    default: 'README.md'
 outputs:
   readme:
     description: 'The genereated README.md from config.yml + course-details.md'

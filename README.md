@@ -1,120 +1,116 @@
+# Create a JavaScript Action
 
-# Learn Velo
+<p align="center">
+  <a href="https://github.com/actions/javascript-action/actions"><img alt="javscript-action status" src="https://github.com/actions/javascript-action/workflows/units-test/badge.svg"></a>
+</p>
 
+Use this template to bootstrap the creation of a JavaScript action.:rocket:
 
-Velo is a full-stack development platform that empowers you to rapidly build, manage and deploy professional web apps.
+This template includes tests, linting, a validation workflow, publishing, and versioning guidance.
 
-## Course Details
+If you are new, there's also a simpler introduction.  See the [Hello World JavaScript Action](https://github.com/actions/hello-world-javascript-action)
 
-This is the description we show on the course page [here](https://lab.github.com/wix-academy/learn-velo). This first paragraph will be featured at the top of the page so make it great.
-​
+## Create an action from this template
 
-​
-Be sure to tell the learner about the technology you are teaching, why they should learn it, how they can use it, and what you will teach them.
-​
+Click the `Use this Template` and provide the new repo details for your action
 
+## Code in Main
 
-Include information on how they can reach you for questions about the content or course. 
+Install the dependencies
 
-### Help
+```bash
+npm install
+```
 
-[Post on the #academy Slack channel](https://wix.slack.com/archives/CE2AFKXEK)
+Run the tests :heavy_check_mark:
 
-## Steps
-    
+```bash
+$ npm test
 
-<details id=0 open>
-<summary><h2>01 - Welcome to Velo, Wix’s developer mode</h2></summary>
+ PASS  ./index.test.js
+  ✓ throws invalid number (3ms)
+  ✓ wait 500 ms (504ms)
+  ✓ test runs (95ms)
+...
+```
 
-Our developer advocate Joshua Alphonse is happy to introduce you to this powerful product so you can start creating your custom solutions.
+## Change action.yml
 
+The action.yml defines the inputs and output for your action.
 
-#### Watch the video
+Update the action.yml with your name, description, inputs and outputs for your action.
 
-[![Welcome to Velo, Wix’s developer mode](https://img.youtube.com/vi/JyTegNu4MHw/0.jpg)](https://www.youtube.com/watch?v=JyTegNu4MHw "Welcome to Velo, Wix’s developer mode") 
+See the [documentation](https://help.github.com/en/articles/metadata-syntax-for-github-actions)
 
+## Change the Code
 
-👉 [Welcome to Velo, Wix’s developer mode](https://learn-code.wix.com/en/article/about-velo-2466982)
-</details>
+Most toolkit and CI/CD operations involve async operations so the action is run in an async function.
 
-<details id=1 >
-<summary><h2>02 - A tour of Velo interface</h2></summary>
+```javascript
+const core = require('@actions/core');
+...
 
-learn where to find the tools and resources you need to add custom functionality to your site using code
+async function run() {
+  try {
+      ...
+  }
+  catch (error) {
+    core.setFailed(error.message);
+  }
+}
 
+run()
+```
 
-#### Watch the video
+See the [toolkit documentation](https://github.com/actions/toolkit/blob/master/README.md#packages) for the various packages.
 
-[![A tour of Velo interface](https://img.youtube.com/vi/rzReCvkI4gg/0.jpg)](https://www.youtube.com/watch?v=rzReCvkI4gg "A tour of Velo interface") 
+## Package for distribution
 
+GitHub Actions will run the entry point from the action.yml. Packaging assembles the code into one file that can be checked in to Git, enabling fast and reliable execution and preventing the need to check in node_modules.
 
-👉 [A tour of Velo interface](https://learn-code.wix.com/en/article/getting-oriented-521681)
-</details>
+Actions are run from GitHub repos.  Packaging the action will create a packaged action in the dist folder.
 
-<details id=2 >
-<summary><h2>03 - 📖 Read: Velo API Introduction</h2></summary>
+Run prepare
 
-Use the APIs to interact with site elements, your site’s database content, Wix Apps, and external services.  The APIs also give you access to information about your site, its users, and more.
+```bash
+npm run prepare
+```
 
+Since the packaged index.js is run from the dist folder.
 
+```bash
+git add dist
+```
 
-👉 [📖 Read: Velo API Introduction](https://hackernoon.com/velo-api-introduction-the-basic-things-you-should-know-about-the-velo-jc2d33uz)
-</details>
+## Create a release branch
 
-<details id=3 >
-<summary><h2>04 - 📺 Add Custom Interactions with JavaScript | 5:48 ⏳</h2></summary>
+Users shouldn't consume the action from master since that would be latest code and actions can break compatibility between major versions.
 
-Learn how to use Velo to create custom interactions on your site. Visit the link to see a working example
+Checkin to the v1 release branch
 
+```bash
+git checkout -b v1
+git commit -a -m "v1 release"
+```
 
-#### Watch the video
+```bash
+git push origin v1
+```
 
-[![📺 Add Custom Interactions with JavaScript | 5:48 ⏳](https://img.youtube.com/vi/aayDBLTKG5c/0.jpg)](https://www.youtube.com/watch?v=aayDBLTKG5c "📺 Add Custom Interactions with JavaScript | 5:48 ⏳") 
+Note: We recommend using the `--license` option for ncc, which will create a license file for all of the production node modules used in your project.
 
+Your action is now published! :rocket:
 
-👉 [📺 Add Custom Interactions with JavaScript | 5:48 ⏳](https://www.wix.com/velo/example/hide-%26-show-elements)
-</details>
+See the [versioning documentation](https://github.com/actions/toolkit/blob/master/docs/action-versioning.md)
 
-<details id=4 >
-<summary><h2>05 - 📖 Read the getting started guide (2-3 hours 🕒)</h2></summary>
+## Usage
 
-Let's take a quick look at how to get started writing your first Velo code. We'll do that by creating a traditional Hello World app - Velo style.
+You can now consume the action by referencing the v1 branch
 
+```yaml
+uses: actions/javascript-action@v1
+with:
+  milliseconds: 1000
+```
 
-
-👉 [📖 Read the getting started guide (2-3 hours 🕒)](https://learn-code.wix.com/en/getting-started-guides/beginners-guide)
-</details>
-
-<details id=5 >
-<summary><h2>06 - (Optional) 👩‍💻 take on a side by side exercises (2 hours 🕑)</h2></summary>
-
-Take on a tutorial inside Wix editor, we'll make a collapsed paragraph expand on button click. Use a switch to change image element source. Set up a sticky header (onScroll down).
-
-
-
-👉 [(Optional) 👩‍💻 take on a side by side exercises (2 hours 🕑)](https://learn-code.wix.com/en/step-by-step-exercises-3016544)
-</details>
-
-<details id=6 >
-<summary><h2>07 - Build a to-do list</h2></summary>
-
-The to do list will display all items in the list using a repeater. Add a text input element and button. Clicking the button or pressing the enter  key will add the item in the text input element to the to do list.
-
-
-
-👉 [Build a to-do list](https://www.wix.com/velo/example/to-do-list)
-</details>
-
-<details id=X >
-<summary><h2>08 - Start using Wix Velo today</h2></summary>
-
-Now that you know how to use Velo enable it in one of your sites. Select a Wix Site you want to intergarte Velo into today.
-
-
-#### Watch the video
-
-[![Start using Wix Velo today](https://img.youtube.com/vi/D5D1b0J0hQE/0.jpg)](https://www.youtube.com/watch?v=D5D1b0J0hQE "Start using Wix Velo today") 
-
-
-👉 [Start using Wix Velo today](https://www.wix.com/my-account/site-selector/?buttonText=Start+Now&title=Select+A+Site&actionUrl=https%3A%2F%2Feditor.wix.com%2Fhtml%2Feditor%2Fweb%2Frenderer%2Fedit%2F%7B%7BprimaryApp.idInApp%7D%7D%3FmetaSiteId%3D%7B%7BmetaSiteId%7D%7D%26editorSessionId%3D%7B%7Besi%7D%7D%26autoDevMode%3Dtrue)
-</details>
+See the [actions tab](https://github.com/actions/javascript-action/actions) for runs of this action! :rocket:

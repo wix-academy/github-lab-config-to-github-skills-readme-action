@@ -54,7 +54,7 @@ ${link ? `👉 [${title}](${link})` : ''}
 }
 
 
-async function generateReadmeFromConfig(configPath='config.yml', courseDetailsPath='course-details.md', consoleErr = console.error) {
+async function generateReadmeFromConfig(configPath='config.yml', courseDetailsPath='course-details.md', readmePath='./README.md', consoleErr = console.error) {
     const yamlFile = await fs.readFile(configPath, 'utf8');
     const labConfig = parse(yamlFile);
 
@@ -72,7 +72,7 @@ async function generateReadmeFromConfig(configPath='config.yml', courseDetailsPa
             _readmeTemplate = _readmeTemplate.concat(mdTemplate);
         });
 
-        await fs.writeFile(`./README.md`, _readmeTemplate)
+        await fs.writeFile(readmePath, _readmeTemplate)
         return _readmeTemplate;
     } catch (error) {
         consoleErr('README.md GitHub Skill format file creating error: ', error);
@@ -10063,9 +10063,10 @@ async function run() {
   try {
     const configPath = core.getInput('config-file');
     const courseDetailsPath = core.getInput('course-details-file');
-    core.info(`Generating README.md from ${configPath}, ${courseDetailsPath} ...`);
+    const readmePath = core.getInput('readme-file');
+    core.info(`Generating ${readmePath} from ${configPath}, ${courseDetailsPath} ...`);
 
-    const readmeContent = await generateReadmeFromConfig(configPath, courseDetailsPath, core.error);
+    const readmeContent = await generateReadmeFromConfig(configPath, courseDetailsPath, readmePath, core.error);
 
     core.setOutput('readme', readmeContent);
   } catch (error) {
