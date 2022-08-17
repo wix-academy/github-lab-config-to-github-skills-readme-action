@@ -1,0 +1,52 @@
+title: Learn Velo
+description: Velo is a full-stack development platform that empowers you to rapidly build, manage and deploy professional web apps.
+steps:
+  - title: 'Welcome to Velo, Wix’s developer mode'
+    link: 'https://learn-code.wix.com/en/article/about-velo-2466982'
+    video: 'https://youtube.com/embed/JyTegNu4MHw'
+    description: >-
+      Our developer advocate Joshua Alphonse is happy to introduce you to this powerful product so you can start creating your custom solutions.
+      
+  - title: A tour of Velo interface
+    link: 'https://learn-code.wix.com/en/article/getting-oriented-521681'  
+    video: 'https://youtube.com/embed/rzReCvkI4gg'
+    description: >-
+      learn where to find the tools and resources you need to add custom functionality to your site using code
+
+  - title: '📖 Read: Velo API Introduction'
+    link: 'https://hackernoon.com/velo-api-introduction-the-basic-things-you-should-know-about-the-velo-jc2d33uz'
+    description: >-
+      Use the APIs to interact with site elements, your site’s database content, Wix Apps, and external services. 
+      The APIs also give you access to information about your site, its users, and more.
+
+  - title: '📺 Add Custom Interactions with JavaScript | 5:48 ⏳'
+    video: 'https://youtube.com/embed/aayDBLTKG5c'
+    link: 'https://www.wix.com/velo/example/hide-%26-show-elements'
+    description: >-
+      Learn how to use Velo to create custom interactions on your site.
+      Visit the link to see a working example
+      
+  - title: '📖 Read the getting started guide (2-3 hours 🕒)'
+    link: 'https://learn-code.wix.com/en/getting-started-guides/beginners-guide'
+    description: >-
+      Let's take a quick look at how to get started writing your first Velo code. We'll do that by creating a traditional Hello World app - Velo style.
+      
+  - title: '(Optional) 👩‍💻 take on a side by side exercises (2 hours 🕑)'
+    link: 'https://learn-code.wix.com/en/step-by-step-exercises-3016544'
+    description: >-
+      Take on a tutorial inside Wix editor, we'll make a collapsed paragraph expand on button click.
+      Use a switch to change image element source.
+      Set up a sticky header (onScroll down).
+      
+  - title: 'Build a to-do list'
+    link: 'https://www.wix.com/velo/example/to-do-list'
+    description: >-
+      The to do list will display all items in the list using a repeater.
+      Add a text input element and button. Clicking the button or pressing the enter 
+      key will add the item in the text input element to the to do list.
+      
+  - title: 'Start using Wix Velo today'
+    video: 'https://youtube.com/embed/D5D1b0J0hQE'
+    description: >-
+      Now that you know how to use Velo enable it in one of your sites. Select a Wix Site you want to intergarte Velo into today.
+    link: 'https://www.wix.com/my-account/site-selector/?buttonText=Start+Now&title=Select+A+Site&actionUrl=https%3A%2F%2Feditor.wix.com%2Fhtml%2Feditor%2Fweb%2Frenderer%2Fedit%2F%7B%7BprimaryApp.idInApp%7D%7D%3FmetaSiteId%3D%7B%7BmetaSiteId%7D%7D%26editorSessionId%3D%7B%7Besi%7D%7D%26autoDevMode%3Dtrue'

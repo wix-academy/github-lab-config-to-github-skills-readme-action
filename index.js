@@ -1,18 +1,15 @@
 const core = require('@actions/core');
-const wait = require('./wait');
+const { generateReadmeFromConfig } = require('./generate-github-skills-readme-from-lab-config');
 
-
-// most @actions toolkit packages have async methods
 async function run() {
   try {
-    const ms = core.getInput('milliseconds');
-    core.info(`Waiting ${ms} milliseconds ...`);
+    const configPath = core.getInput('config-file');
+    const courseDetailsPath = core.getInput('course-details-file');
+    core.info(`Generating README.md from ${configPath}, ${courseDetailsPath} ...`);
 
-    core.debug((new Date()).toTimeString()); // debug is only output if you set the secret `ACTIONS_RUNNER_DEBUG` to true
-    await wait(parseInt(ms));
-    core.info((new Date()).toTimeString());
+    const readmeContent = await generateReadmeFromConfig(configPath, courseDetailsPath, core.error);
 
-    core.setOutput('time', new Date().toTimeString());
+    core.setOutput('readme', readmeContent);
   } catch (error) {
     core.setFailed(error.message);
   }

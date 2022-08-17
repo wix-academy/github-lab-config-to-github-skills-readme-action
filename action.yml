@@ -5,9 +5,13 @@ inputs:
     description: 'config.yml path'
     required: true
     default: 'config.yml'
-# outputs:
-#   time: # output will be available to future steps
-#     description: 'The current time after waiting'
+  coursedetailsfile: # course-details.md
+    description: 'course-details.md path'
+    required: true
+    default: 'course-details.md'
+outputs:
+  readme:
+    description: 'The genereated README.md from config.yml + course-details.md'
 runs:
   using: 'node16'
   main: 'dist/index.js'

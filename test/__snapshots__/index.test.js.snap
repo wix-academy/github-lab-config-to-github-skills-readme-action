@@ -1,4 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`generate readme 1`] = `
+"
 # Learn Velo
 
 
@@ -31,7 +34,7 @@ Our developer advocate Joshua Alphonse is happy to introduce you to this powerfu
 
 #### Watch the video
 
-[![Welcome to Velo, Wix’s developer mode](https://img.youtube.com/vi/JyTegNu4MHw/0.jpg)](https://www.youtube.com/watch?v=JyTegNu4MHw "Welcome to Velo, Wix’s developer mode") 
+[![Welcome to Velo, Wix’s developer mode](https://img.youtube.com/vi/JyTegNu4MHw/0.jpg)](https://www.youtube.com/watch?v=JyTegNu4MHw \\"Welcome to Velo, Wix’s developer mode\\") 
 
 
 👉 [Welcome to Velo, Wix’s developer mode](https://learn-code.wix.com/en/article/about-velo-2466982)
@@ -45,7 +48,7 @@ learn where to find the tools and resources you need to add custom functionality
 
 #### Watch the video
 
-[![A tour of Velo interface](https://img.youtube.com/vi/rzReCvkI4gg/0.jpg)](https://www.youtube.com/watch?v=rzReCvkI4gg "A tour of Velo interface") 
+[![A tour of Velo interface](https://img.youtube.com/vi/rzReCvkI4gg/0.jpg)](https://www.youtube.com/watch?v=rzReCvkI4gg \\"A tour of Velo interface\\") 
 
 
 👉 [A tour of Velo interface](https://learn-code.wix.com/en/article/getting-oriented-521681)
@@ -69,7 +72,7 @@ Learn how to use Velo to create custom interactions on your site. Visit the link
 
 #### Watch the video
 
-[![📺 Add Custom Interactions with JavaScript | 5:48 ⏳](https://img.youtube.com/vi/aayDBLTKG5c/0.jpg)](https://www.youtube.com/watch?v=aayDBLTKG5c "📺 Add Custom Interactions with JavaScript | 5:48 ⏳") 
+[![📺 Add Custom Interactions with JavaScript | 5:48 ⏳](https://img.youtube.com/vi/aayDBLTKG5c/0.jpg)](https://www.youtube.com/watch?v=aayDBLTKG5c \\"📺 Add Custom Interactions with JavaScript | 5:48 ⏳\\") 
 
 
 👉 [📺 Add Custom Interactions with JavaScript | 5:48 ⏳](https://www.wix.com/velo/example/hide-%26-show-elements)
@@ -113,8 +116,10 @@ Now that you know how to use Velo enable it in one of your sites. Select a Wix S
 
 #### Watch the video
 
-[![Start using Wix Velo today](https://img.youtube.com/vi/D5D1b0J0hQE/0.jpg)](https://www.youtube.com/watch?v=D5D1b0J0hQE "Start using Wix Velo today") 
+[![Start using Wix Velo today](https://img.youtube.com/vi/D5D1b0J0hQE/0.jpg)](https://www.youtube.com/watch?v=D5D1b0J0hQE \\"Start using Wix Velo today\\") 
 
 
 👉 [Start using Wix Velo today](https://www.wix.com/my-account/site-selector/?buttonText=Start+Now&title=Select+A+Site&actionUrl=https%3A%2F%2Feditor.wix.com%2Fhtml%2Feditor%2Fweb%2Frenderer%2Fedit%2F%7B%7BprimaryApp.idInApp%7D%7D%3FmetaSiteId%3D%7B%7BmetaSiteId%7D%7D%26editorSessionId%3D%7B%7Besi%7D%7D%26autoDevMode%3Dtrue)
 </details>
+"
+`;
