@@ -25,3 +25,21 @@ jobs:
         config-file: 'test/config.yml'
         course-details-file: 'test/course-details.md'
         readme-file: 'test/out/readme.md'
+
+  # ADDON Tests
+  test-addons:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - uses: ./
+      with:
+        config-file: 'test/config-with-files.yml'
+        course-details-file: 'test/course-details.md'
+        readme-file: 'test/out/readme-with-files-inline-links.md' 
+        inline-markdown-links: true
+    - uses: ./
+      with:
+        config-file: 'test/config-with-files.yml'
+        course-details-file: 'test/course-details.md'
+        readme-file: 'test/out/readme-with-files-no-inline-links.md' 
+        inline-markdown-links: false
