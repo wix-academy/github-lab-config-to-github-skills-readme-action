@@ -51,7 +51,7 @@ ${!noLink && link ? `👉 [${title}](${link})` : ''}
 }
 
 function isPathtoRelativeMdFile(path) {
-    return path.endsWith('.md') && !path.startsWith('https://') && RegExp('(\./)?[a-z/]*\.md').test(path)
+    return path.endsWith('.md') && !path.startsWith('https://') && RegExp('(./)?[a-zA-Z0-9/]*.md').test(path)
 }
 
 async function generateReadmeFromConfig(
