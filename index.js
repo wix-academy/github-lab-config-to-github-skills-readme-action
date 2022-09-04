@@ -6,9 +6,13 @@ async function run() {
     const configPath = core.getInput('config-file');
     const courseDetailsPath = core.getInput('course-details-file');
     const readmePath = core.getInput('readme-file');
+    const inlineMDlinks = core.getBooleanInput('inline-markdown-links');
+
     core.info(`Generating ${readmePath} from ${configPath}, ${courseDetailsPath} ...`);
 
-    const readmeContent = await generateReadmeFromConfig(configPath, courseDetailsPath, readmePath, core.error);
+    const readmeContent = await generateReadmeFromConfig(configPath, courseDetailsPath, readmePath, core.error, {
+      inlineMDlinks
+    });
 
     core.setOutput('readme', readmeContent);
   } catch (error) {

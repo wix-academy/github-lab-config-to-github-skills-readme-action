@@ -25,7 +25,10 @@ ${helpLink && helpText ? `[${helpText}](${helpLink})` : `[Post on the #academy S
 `;
 }
 
-function stepTemplate(index, stepsCount, title, description, video, link) {
+function stepTemplate(index, stepsCount, title, description, video, link, {
+    mdFileContent,
+    noLink
+}) {
     const stepTitle = `${(index + 1).toString().padStart(2, '0')} - ${title}`;
     const ytVideoId = video && video.replace('https://youtube.com/embed/', '');
 
@@ -41,14 +44,25 @@ ${ytVideoId ?
 
 ${ytVideoMdTemplate(title, ytVideoId)} 
 ` : ''}
-
-${link ? `👉 [${title}](${link})` : ''}
+${mdFileContent ? mdFileContent+'\n' : ''}
+${!noLink && link ? `👉 [${title}](${link})` : ''}
 </details>
 `;
 }
 
+function isPathtoRelativeMdFile(path) {
+    return path.endsWith('.md') && !path.startsWith('https://') && RegExp('\.?.\.md').test(path)
+}
 
-async function generateReadmeFromConfig(configPath='config.yml', courseDetailsPath='course-details.md', readmePath='./README.md', consoleErr = console.error) {
+async function generateReadmeFromConfig(
+    configPath='config.yml', 
+    courseDetailsPath='course-details.md', 
+    readmePath='./README.md', 
+    consoleErr = console.error, 
+    // ADDON: Options
+    {
+        inlineMDlinks
+    } = {}) {
     const yamlFile = await fs.readFile(configPath, 'utf8');
     const labConfig = parse(yamlFile);
 
@@ -57,11 +71,31 @@ async function generateReadmeFromConfig(configPath='config.yml', courseDetailsPa
     const courseDetailsFile = await fs.readFile(courseDetailsPath, 'utf8');
     let _readmeTemplate = readmeTemplate(title, description, courseDetailsFile, helpLink, helpText);
 
-    try {
-        labConfig.steps.forEach((step, index) => {
-            const { title, description, video, link } = step;
+    let labConfigSteps = labConfig.steps; 
+    // ADDON: files & inline md links
+    labConfigSteps = await Promise.all(labConfigSteps.map(async (step, index) => {
+        const { link, file, inlineMDlink } = step;
+        
+        let mdFileContent = null;
+        if (((inlineMDlinks || inlineMDlink) && (link && isPathtoRelativeMdFile(link))) || file) {
+            const filePath = file || (inlineMDlinks || inlineMDlink) && link;
+            mdFileContent = await fs.readFile(filePath, 'utf8');
+        }
 
-            const mdTemplate = stepTemplate(index, labConfig.steps.length, title, description, video, link)
+        return {...step, index, mdFileContent, noLink: (inlineMDlinks || inlineMDlink)}
+    }))
+    labConfigSteps.sort((a, b) => a.index - b.index);
+
+    try {
+        labConfigSteps.forEach((step, index) => {
+            const { title, description, video, link, ...addonProps } = step;
+            
+            const mdTemplate = stepTemplate(index, labConfigSteps.length, title, description, video, link, 
+            // ADDON: Properties
+            {
+                ...addonProps,
+                inlineMDlinks,
+            })
 
             _readmeTemplate = _readmeTemplate.concat(mdTemplate);
         });
@@ -77,5 +111,8 @@ async function generateReadmeFromConfig(configPath='config.yml', courseDetailsPa
 
 
 module.exports = {
- generateReadmeFromConfig    
+ generateReadmeFromConfig,
+ isPathtoRelativeMdFile,
+ readmeTemplate,
+ stepTemplate
 }
