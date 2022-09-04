@@ -1,6 +1,12 @@
 const process = require("process");
 const cp = require("child_process");
 
+const itif = (condition) => condition ? it : it.skip;
+const itSkipInCI = itif(!process.env['CI'])
+
+const describeif = (condition) => condition ? describe : describe.skip;
+const describeSkipInCI = describeif(!process.env['CI'])
+
 const {
   generateReadmeFromConfig,
   isPathtoRelativeMdFile,
@@ -19,7 +25,7 @@ test("generate readme", async () => {
 
 
 // shows how the runner will run a javascript action with env / stdout protocol
-test("test runs", () => {
+itSkipInCI("test runs", () => {
   process.env["INPUT_CONFIG-FILE"] = "test/config.yml";
   process.env["INPUT_COURSE-DETAILS-FILE"] = "test/course-details.md";
   process.env["INPUT_README-FILE"] = "test/out/readme.md";
@@ -60,7 +66,7 @@ describe("Addon", () => {
       expect(readme).toMatchSnapshot();
     });
 
-    describe("test runs", () => {
+    describeSkipInCI("test runs", () => {
       test("with files with inline links", () => {
         process.env["INPUT_CONFIG-FILE"] = "test/config-with-files.yml";
         process.env["INPUT_COURSE-DETAILS-FILE"] = "test/course-details.md";
