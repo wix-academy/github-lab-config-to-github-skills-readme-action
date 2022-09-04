@@ -13,6 +13,10 @@ inputs:
     description: 'README.md to generate'
     required: true
     default: 'README.md'
+  inline-markdown-links:
+    description: inline relative markdown files links provided in step link property.
+    default: 'false'
+    required: false
 outputs:
   readme:
     description: 'The genereated README.md from config.yml + course-details.md'
