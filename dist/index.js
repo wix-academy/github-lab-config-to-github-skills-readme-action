@@ -5,6 +5,7 @@ require('./sourcemap-register.js');/******/ (() => { // webpackBootstrap
 /***/ ((module, __unused_webpack_exports, __nccwpck_require__) => {
 
 const fs = __nccwpck_require__(5747).promises;
+const path = __nccwpck_require__(5622);
 const { parse } = __nccwpck_require__(5065);
 
 function ytVideoMdTemplate(title, ytVideoId) {
@@ -67,12 +68,18 @@ function isPathtoRelativeMdFile(path) {
 async function generateReadmeFromConfig(
     configPath='config.yml', 
     courseDetailsPath='course-details.md', 
-    readmePath='./README.md', 
+    readmePath='./README.md',
+    rootPath='./',
     consoleErr = console.error, 
     // ADDON: Options
     {
         inlineMDlinks
     } = {}) {
+        console.log('root:', rootPath);
+    configPath = path.resolve(rootPath, configPath);
+    courseDetailsPath = path.resolve(rootPath, courseDetailsPath);
+    readmePath = path.resolve(rootPath, readmePath);
+
     const yamlFile = await fs.readFile(configPath, 'utf8');
     const labConfig = parse(yamlFile);
 
@@ -89,7 +96,7 @@ async function generateReadmeFromConfig(
         let mdFileContent = null;
         if (((inlineMDlinks || inlineMDlink) && (link && isPathtoRelativeMdFile(link))) || file) {
             const filePath = file || (inlineMDlinks || inlineMDlink) && link;
-            mdFileContent = await fs.readFile(filePath, 'utf8');
+            mdFileContent = await fs.readFile(path.resolve(rootPath, filePath), 'utf8');
         }
 
         return {...step, index, mdFileContent, noLink: (inlineMDlinks || inlineMDlink)}
@@ -10106,11 +10113,12 @@ async function run() {
     const configPath = core.getInput('config-file');
     const courseDetailsPath = core.getInput('course-details-file');
     const readmePath = core.getInput('readme-file');
+    const rootPath = core.getInput('root-path');
     const inlineMDlinks = core.getBooleanInput('inline-markdown-links');
 
-    core.info(`Generating ${readmePath} from ${configPath}, ${courseDetailsPath} ...`);
+    core.info(`Generating in ${rootPath}: ${readmePath} from ${configPath}, ${courseDetailsPath} ...`);
 
-    const readmeContent = await generateReadmeFromConfig(configPath, courseDetailsPath, readmePath, core.error, {
+    const readmeContent = await generateReadmeFromConfig(configPath, courseDetailsPath, readmePath, rootPath, core.error, {
       inlineMDlinks
     });
 
