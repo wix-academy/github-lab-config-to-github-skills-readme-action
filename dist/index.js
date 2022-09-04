@@ -31,12 +31,16 @@ ${helpLink && helpText ? `[${helpText}](${helpLink})` : `[Post on the #academy S
 `;
 }
 
+function extractYTVidfromUrl(videoUrl) {
+    return videoUrl && videoUrl.includes('youtube.com/embed/') && videoUrl.split('embed/')[1].split('/')[0]
+}
+
 function stepTemplate(index, stepsCount, title, description, video, link, {
     mdFileContent,
     noLink
 }) {
     const stepTitle = `${(index + 1).toString().padStart(2, '0')} - ${title}`;
-    const ytVideoId = video && video.replace('https://youtube.com/embed/', '');
+    const ytVideoId = extractYTVidfromUrl(video);
 
     return `
 <details id=${index === stepsCount - 1 ? 'X' : index} ${index === 0 ? 'open' : ''}>
@@ -119,6 +123,7 @@ async function generateReadmeFromConfig(
 module.exports = {
  generateReadmeFromConfig,
  isPathtoRelativeMdFile,
+ extractYTVidfromUrl,
  readmeTemplate,
  stepTemplate
 }

@@ -10,6 +10,7 @@ const describeSkipInCI = describeif(!process.env['CI'])
 const {
   generateReadmeFromConfig,
   isPathtoRelativeMdFile,
+  extractYTVidfromUrl
 } = require("../generate-github-skills-readme-from-lab-config");
 
 test("generate readme", async () => {
@@ -22,7 +23,13 @@ test("generate readme", async () => {
   expect(readme).toMatchSnapshot();
 });
 
-
+test('extractYTVidfromUrl', () => {
+  expect(extractYTVidfromUrl('https://www.youtube.com/embed/ISAplsTsIOE')).toBe('ISAplsTsIOE')
+  expect(extractYTVidfromUrl('https://www.youtube.com/embed/ISAplsTsIOE/')).toBe('ISAplsTsIOE')
+  expect(extractYTVidfromUrl('https://youtube.com/embed/ISAplsTsIOE')).toBe('ISAplsTsIOE')
+  expect(extractYTVidfromUrl('http://youtube.com/embed/ISAplsTsIOE/')).toBe('ISAplsTsIOE')
+  expect(extractYTVidfromUrl('https://youtu.be/gal01wQlHzo')).toBeFalsy()
+})
 
 // shows how the runner will run a javascript action with env / stdout protocol
 itSkipInCI("test runs", () => {
