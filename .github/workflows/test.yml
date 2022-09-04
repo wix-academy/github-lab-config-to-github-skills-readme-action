@@ -22,4 +22,6 @@ jobs:
     - uses: actions/checkout@v3
     - uses: ./
       with:
-        milliseconds: 1000
+        config-file: 'test/config.yml'
+        course-details-file: 'test/course-details.md'
+        readme-file: 'test/out/readme.md'
