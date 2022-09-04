@@ -13,6 +13,10 @@ inputs:
     description: 'README.md to generate'
     required: true
     default: 'README.md'
+  root-path: # ./
+    description: a base path all the lab config files are located
+    required: false
+    default: './'
   inline-markdown-links:
     description: inline relative markdown files links provided in step link property.
     default: 'false'

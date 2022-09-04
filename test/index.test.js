@@ -20,6 +20,14 @@ test("generate readme", async () => {
     "test/out/readme.md"
   );
 
+  const readmeWithRoot = await generateReadmeFromConfig(
+    "config.yml",
+    "course-details.md",
+    "out/readme.md",
+    "test/",
+  );
+
+  expect(readme).toEqual(readmeWithRoot);
   expect(readme).toMatchSnapshot();
 });
 
@@ -37,6 +45,7 @@ itSkipInCI("test runs", () => {
   process.env["INPUT_COURSE-DETAILS-FILE"] = "test/course-details.md";
   process.env["INPUT_README-FILE"] = "test/out/readme.md";
   process.env["INPUT_INLINE-MARKDOWN-LINKS"] = "false";
+  process.env["INPUT_ROOT-PATH"] = "./"; 
   const result = cp.execSync(`node index.js`, { env: process.env }).toString();
   console.log(result);
 });
@@ -54,9 +63,10 @@ describe("Addon", () => {
 
     test("generate readme with inline files", async () => {
       const readme = await generateReadmeFromConfig(
-        "test/config-with-files.yml",
-        "test/course-details.md",
-        "test/out/readme-with-files-no-inline-links.md"
+        "config-with-files.yml",
+        "course-details.md",
+        "out/readme-with-files-no-inline-links.md",
+        "test/"
       );
     
       expect(readme).toMatchSnapshot();
@@ -64,9 +74,10 @@ describe("Addon", () => {
     
     test("generate readme with inline files - inline all links options", async () => {
       const readme = await generateReadmeFromConfig(
-        "test/config-with-files.yml",
-        "test/course-details.md",
-        "test/out/readme-with-files-inline-links.md",
+        "config-with-files.yml",
+        "course-details.md",
+        "out/readme-with-files-inline-links.md",
+        "test",
         {
           inlineMDlinks: true,
         }
@@ -77,10 +88,11 @@ describe("Addon", () => {
 
     describeSkipInCI("test runs", () => {
       test("with files with inline links", () => {
-        process.env["INPUT_CONFIG-FILE"] = "test/config-with-files.yml";
-        process.env["INPUT_COURSE-DETAILS-FILE"] = "test/course-details.md";
-        process.env["INPUT_README-FILE"] = "test/out/readme-with-files-inline-links.md";
+        process.env["INPUT_CONFIG-FILE"] = "config-with-files.yml";
+        process.env["INPUT_COURSE-DETAILS-FILE"] = "course-details.md";
+        process.env["INPUT_README-FILE"] = "out/readme-with-files-inline-links.md";
         process.env["INPUT_INLINE-MARKDOWN-LINKS"] = "true";
+        process.env["INPUT_ROOT-PATH"] = "./test"; 
         const result = cp
           .execSync(`node index.js`, { env: process.env })
           .toString();
@@ -88,10 +100,11 @@ describe("Addon", () => {
       });
   
       test("with files no inline links", () => {
-        process.env["INPUT_CONFIG-FILE"] = "test/config-with-files.yml";
-        process.env["INPUT_COURSE-DETAILS-FILE"] = "test/course-details.md";
-        process.env["INPUT_README-FILE"] = "test/out/readme-with-files-no-inline-links.md";
+        process.env["INPUT_CONFIG-FILE"] = "config-with-files.yml";
+        process.env["INPUT_COURSE-DETAILS-FILE"] = "course-details.md";
+        process.env["INPUT_README-FILE"] = "out/readme-with-files-no-inline-links.md";
         process.env["INPUT_INLINE-MARKDOWN-LINKS"] = "false";
+        process.env["INPUT_ROOT-PATH"] = "./test"; 
         const result = cp
           .execSync(`node index.js`, { env: process.env })
           .toString();

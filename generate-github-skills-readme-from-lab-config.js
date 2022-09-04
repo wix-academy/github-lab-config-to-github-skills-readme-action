@@ -1,4 +1,5 @@
 const fs = require('fs').promises;
+const path = require('path');
 const { parse } = require('yaml');
 
 function ytVideoMdTemplate(title, ytVideoId) {
@@ -61,12 +62,18 @@ function isPathtoRelativeMdFile(path) {
 async function generateReadmeFromConfig(
     configPath='config.yml', 
     courseDetailsPath='course-details.md', 
-    readmePath='./README.md', 
+    readmePath='./README.md',
+    rootPath='./',
     consoleErr = console.error, 
     // ADDON: Options
     {
         inlineMDlinks
     } = {}) {
+        console.log('root:', rootPath);
+    configPath = path.resolve(rootPath, configPath);
+    courseDetailsPath = path.resolve(rootPath, courseDetailsPath);
+    readmePath = path.resolve(rootPath, readmePath);
+
     const yamlFile = await fs.readFile(configPath, 'utf8');
     const labConfig = parse(yamlFile);
 
@@ -83,7 +90,7 @@ async function generateReadmeFromConfig(
         let mdFileContent = null;
         if (((inlineMDlinks || inlineMDlink) && (link && isPathtoRelativeMdFile(link))) || file) {
             const filePath = file || (inlineMDlinks || inlineMDlink) && link;
-            mdFileContent = await fs.readFile(filePath, 'utf8');
+            mdFileContent = await fs.readFile(path.resolve(rootPath, filePath), 'utf8');
         }
 
         return {...step, index, mdFileContent, noLink: (inlineMDlinks || inlineMDlink)}

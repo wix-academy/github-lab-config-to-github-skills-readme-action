@@ -2,14 +2,14 @@ title: Learn Velo
 description: Velo is a full-stack development platform that empowers you to rapidly build, manage and deploy professional web apps.
 steps:
   - title: 'Welcome to Velo, Wix’s developer mode'
-    link: ./test/steps/00_step.md
+    link: ./steps/00_step.md
     video: 'https://youtube.com/embed/JyTegNu4MHw'
     description: >-
       Our developer advocate Joshua Alphonse is happy to introduce you to this powerful product so you can start creating your custom solutions.
     inlineMDlink: true
       
   - title: A tour of Velo interface
-    file: ./test/steps/00_step.md
+    file: ./steps/00_step.md
     video: 'https://youtube.com/embed/rzReCvkI4gg'
     description: >-
       learn where to find the tools and resources you need to add custom functionality to your site using code
@@ -22,7 +22,7 @@ steps:
 
   - title: '📺 Add Custom Interactions with JavaScript | 5:48 ⏳'
     video: 'https://youtube.com/embed/aayDBLTKG5c'
-    link: ./test/steps/01_step.md
+    link: ./steps/01_step.md
     description: >-
       Learn how to use Velo to create custom interactions on your site.
       Visit the link to see a working example
