@@ -67,4 +67,4 @@ typings/
 .next
 
 # generated files
-test/out/readme.md
+test/out/readme*.md
