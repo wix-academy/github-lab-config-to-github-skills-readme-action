@@ -41,6 +41,8 @@ describe("Addon", () => {
       expect(isPathtoRelativeMdFile('steps/0.md')).toBe(true)
       expect(isPathtoRelativeMdFile('https://www.google.com/steps/0.md')).toBe(false)
       expect(isPathtoRelativeMdFile('https://www.google.com')).toBe(false)
+      expect(isPathtoRelativeMdFile('steps/fdsfsd/fdsfsd/fdsf.txt')).toBe(false) 
+      expect(isPathtoRelativeMdFile('steps/fdsfsd/fdsfsd/fdsf.md')).toBe(true) 
     })
 
     test("generate readme with inline files", async () => {
