@@ -21,6 +21,9 @@ inputs:
     description: inline relative markdown files links provided in step link property.
     default: 'false'
     required: false
+  github-default-owner:
+    description: GitHub owner the actions are running on
+    default: '{{ GITHUB_REPOSITORY_OWNER }}'
 outputs:
   readme:
     description: 'The genereated README.md from config.yml + course-details.md'
