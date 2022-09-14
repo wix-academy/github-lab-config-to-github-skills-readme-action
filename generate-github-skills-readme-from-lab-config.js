@@ -6,7 +6,7 @@ function ytVideoMdTemplate(title, ytVideoId) {
     return `[![${title}](https://img.youtube.com/vi/${ytVideoId}/0.jpg)](https://www.youtube.com/watch?v=${ytVideoId} "${title}")`;
 }
 
-function readmeTemplate(title, description, courseDetailsFile, helpLink, helpText) {
+function readmeTemplate(title, description, courseDetailsFile, helpUrl, helpText) {
     return `
 # ${title}
 
@@ -19,7 +19,7 @@ ${courseDetailsFile}
 
 ### Help
 
-${helpLink && helpText ? `[${helpText}](${helpLink})` : `[Post on the #academy Slack channel](https://wix.slack.com/archives/CE2AFKXEK)`}
+${helpUrl && helpText ? `[${helpText}](${helpUrl})` : `[Post on the #academy Slack channel](https://wix.slack.com/archives/CE2AFKXEK)`}
 
 ## Steps
     
@@ -77,10 +77,10 @@ async function generateReadmeFromConfig(
     const yamlFile = await fs.readFile(configPath, 'utf8');
     const labConfig = parse(yamlFile);
 
-    const { title, description, helpText, helpLink } = labConfig;
+    const { title, description, helpText, helpUrl } = labConfig;
 
     const courseDetailsFile = await fs.readFile(courseDetailsPath, 'utf8');
-    let _readmeTemplate = readmeTemplate(title, description, courseDetailsFile, helpLink, helpText);
+    let _readmeTemplate = readmeTemplate(title, description, courseDetailsFile, helpUrl, helpText);
 
     let labConfigSteps = labConfig.steps; 
     // ADDON: files & inline md links
