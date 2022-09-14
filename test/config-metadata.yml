@@ -1,0 +1,18 @@
+title: Learn Velo
+description: Velo is a full-stack development platform that empowers you to rapidly build, manage and deploy professional web apps.
+
+helpText: 'Post on #wix-blocks-help channel'
+helpUrl: https://wix.slack.com/archives/CKDB50KE2
+
+tags:
+  - Wix Blocks
+  - BoB
+  - JavaScript
+  - Hands-on
+
+steps:
+  - title: 'Welcome to Velo, Wix’s developer mode'
+    link: 'https://learn-code.wix.com/en/article/about-velo-2466982'
+    video: 'https://youtube.com/embed/JyTegNu4MHw'
+    description: >-
+      Our developer advocate Joshua Alphonse is happy to introduce you to this powerful product so you can start creating your custom solutions.

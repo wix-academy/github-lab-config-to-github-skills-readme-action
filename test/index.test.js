@@ -31,6 +31,17 @@ test("generate readme", async () => {
   expect(readme).toMatchSnapshot();
 });
 
+test('generate readme with metadata', async () => {
+  const readmeWithMetadata = await generateReadmeFromConfig(
+    "config-metadata.yml",
+    "course-details.md",
+    "out/readme-metadata.md",
+    "test/",
+  );
+
+  expect(readmeWithMetadata).toMatchSnapshot(); 
+})
+
 test('extractYTVidfromUrl', () => {
   expect(extractYTVidfromUrl('https://www.youtube.com/embed/ISAplsTsIOE')).toBe('ISAplsTsIOE')
   expect(extractYTVidfromUrl('https://www.youtube.com/embed/ISAplsTsIOE/')).toBe('ISAplsTsIOE')

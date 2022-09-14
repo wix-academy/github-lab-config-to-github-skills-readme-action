@@ -383,3 +383,45 @@ Now that you know how to use Velo enable it in one of your sites. Select a Wix S
 </details>
 "
 `;
+
+exports[`generate readme with metadata 1`] = `
+"
+# Learn Velo
+
+
+Velo is a full-stack development platform that empowers you to rapidly build, manage and deploy professional web apps.
+
+## Course Details
+
+This is the description we show on the course page [here](https://github.com/wix-academy/learn-velo). This first paragraph will be featured at the top of the page so make it great.
+​
+
+​
+Be sure to tell the learner about the technology you are teaching, why they should learn it, how they can use it, and what you will teach them.
+​
+
+
+Include information on how they can reach you for questions about the content or course. 
+
+### Help
+
+[Post on #wix-blocks-help channel](https://wix.slack.com/archives/CKDB50KE2)
+
+## Steps
+    
+
+<details id=X open>
+<summary><h2>01 - Welcome to Velo, Wix’s developer mode</h2></summary>
+
+Our developer advocate Joshua Alphonse is happy to introduce you to this powerful product so you can start creating your custom solutions.
+
+
+#### Watch the video
+
+[![Welcome to Velo, Wix’s developer mode](https://img.youtube.com/vi/JyTegNu4MHw/0.jpg)](https://www.youtube.com/watch?v=JyTegNu4MHw \\"Welcome to Velo, Wix’s developer mode\\") 
+
+
+👉 [Welcome to Velo, Wix’s developer mode](https://learn-code.wix.com/en/article/about-velo-2466982)
+</details>
+"
+`;
