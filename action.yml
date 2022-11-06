@@ -1,5 +1,8 @@
 name: 'Trasform GitHub lab to Github skills format'
 description: 'Take a config.yml, parse it into a README.md'
+branding:
+  icon: 'book'
+  color: 'green'
 inputs:
   config-file:  # config.yml
     description: 'config.yml path'
