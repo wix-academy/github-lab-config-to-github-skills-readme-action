@@ -423,7 +423,7 @@ course description
 <details id=1 >
 <summary><h2>COURSE: 02 - Welcome to Wix Engineering</h2></summary>
 
-This learning path introduces terms and concepts used in Wix Engineering, we recommend bookmarking it and getting back to it from time to time.
+course description 2
 
 
 
@@ -431,7 +431,17 @@ This learning path introduces terms and concepts used in Wix Engineering, we rec
 </details>
 
 <details id=2 >
-<summary><h2>COURSE: 03 - Welcome to Wix Engineering 2</h2></summary>
+<summary><h2>COURSE: 03 - Welcome to Wix Engineering</h2></summary>
+
+This learning path introduces terms and concepts used in Wix Engineering, we recommend bookmarking it and getting back to it from time to time.
+
+
+
+👉 [Welcome to Wix Engineering](https://github.com/wix-academy/welcome-to-wix-engineering-path)
+</details>
+
+<details id=3 >
+<summary><h2>COURSE: 04 - Welcome to Wix Engineering 2</h2></summary>
 
 This learning path introduces terms and concepts used in Wix Engineering, we recommend bookmarking it and getting back to it from time to time.
 
@@ -440,8 +450,8 @@ This learning path introduces terms and concepts used in Wix Engineering, we rec
 👉 [Welcome to Wix Engineering 2](https://github.com/wix-academy/welcome-to-wix-engineering-path)
 </details>
 
-<details id=3 >
-<summary><h2>COURSE: 04 - Welcome to Wix Engineering</h2></summary>
+<details id=4 >
+<summary><h2>COURSE: 05 - Welcome to Wix Engineering</h2></summary>
 
 This learning path introduces terms and concepts used in Wix Engineering, we recommend bookmarking it and getting back to it from time to time.
 
@@ -450,8 +460,8 @@ This learning path introduces terms and concepts used in Wix Engineering, we rec
 👉 [Welcome to Wix Engineering](https://github.com/wix-academy/welcome-to-wix-engineering-path#test)
 </details>
 
-<details id=4 >
-<summary><h2>05 - Welcome to Velo, Wix’s developer mode</h2></summary>
+<details id=5 >
+<summary><h2>06 - Welcome to Velo, Wix’s developer mode</h2></summary>
 
 Our developer advocate Joshua Alphonse is happy to introduce you to this powerful product so you can start creating your custom solutions.
 
@@ -464,8 +474,8 @@ Our developer advocate Joshua Alphonse is happy to introduce you to this powerfu
 👉 [Welcome to Velo, Wix’s developer mode](https://learn-code.wix.com/en/article/about-velo-2466982)
 </details>
 
-<details id=5 >
-<summary><h2>06 - A tour of Velo interface</h2></summary>
+<details id=6 >
+<summary><h2>07 - A tour of Velo interface</h2></summary>
 
 learn where to find the tools and resources you need to add custom functionality to your site using code
 
@@ -478,8 +488,8 @@ learn where to find the tools and resources you need to add custom functionality
 👉 [A tour of Velo interface](https://learn-code.wix.com/en/article/getting-oriented-521681)
 </details>
 
-<details id=6 >
-<summary><h2>07 - 📖 Read: Velo API Introduction</h2></summary>
+<details id=7 >
+<summary><h2>08 - 📖 Read: Velo API Introduction</h2></summary>
 
 Use the APIs to interact with site elements, your site’s database content, Wix Apps, and external services.  The APIs also give you access to information about your site, its users, and more.
 
@@ -488,8 +498,8 @@ Use the APIs to interact with site elements, your site’s database content, Wix
 👉 [📖 Read: Velo API Introduction](https://hackernoon.com/velo-api-introduction-the-basic-things-you-should-know-about-the-velo-jc2d33uz)
 </details>
 
-<details id=7 >
-<summary><h2>08 - 📺 Add Custom Interactions with JavaScript | 5:48 ⏳</h2></summary>
+<details id=8 >
+<summary><h2>09 - 📺 Add Custom Interactions with JavaScript | 5:48 ⏳</h2></summary>
 
 Learn how to use Velo to create custom interactions on your site. Visit the link to see a working example
 
@@ -502,8 +512,8 @@ Learn how to use Velo to create custom interactions on your site. Visit the link
 👉 [📺 Add Custom Interactions with JavaScript | 5:48 ⏳](https://www.wix.com/velo/example/hide-%26-show-elements)
 </details>
 
-<details id=8 >
-<summary><h2>09 - 📖 Read the getting started guide (2-3 hours 🕒)</h2></summary>
+<details id=9 >
+<summary><h2>10 - 📖 Read the getting started guide (2-3 hours 🕒)</h2></summary>
 
 Let's take a quick look at how to get started writing your first Velo code. We'll do that by creating a traditional Hello World app - Velo style.
 
@@ -512,8 +522,8 @@ Let's take a quick look at how to get started writing your first Velo code. We'l
 👉 [📖 Read the getting started guide (2-3 hours 🕒)](https://learn-code.wix.com/en/getting-started-guides/beginners-guide)
 </details>
 
-<details id=9 >
-<summary><h2>10 - (Optional) 👩‍💻 take on a side by side exercises (2 hours 🕑)</h2></summary>
+<details id=10 >
+<summary><h2>11 - (Optional) 👩‍💻 take on a side by side exercises (2 hours 🕑)</h2></summary>
 
 Take on a tutorial inside Wix editor, we'll make a collapsed paragraph expand on button click. Use a switch to change image element source. Set up a sticky header (onScroll down).
 
@@ -522,8 +532,8 @@ Take on a tutorial inside Wix editor, we'll make a collapsed paragraph expand on
 👉 [(Optional) 👩‍💻 take on a side by side exercises (2 hours 🕑)](https://learn-code.wix.com/en/step-by-step-exercises-3016544)
 </details>
 
-<details id=10 >
-<summary><h2>11 - Build a to-do list</h2></summary>
+<details id=11 >
+<summary><h2>12 - Build a to-do list</h2></summary>
 
 The to do list will display all items in the list using a repeater. Add a text input element and button. Clicking the button or pressing the enter  key will add the item in the text input element to the to do list.
 
@@ -533,7 +543,7 @@ The to do list will display all items in the list using a repeater. Add a text i
 </details>
 
 <details id=X >
-<summary><h2>12 - Start using Wix Velo today</h2></summary>
+<summary><h2>13 - Start using Wix Velo today</h2></summary>
 
 Now that you know how to use Velo enable it in one of your sites. Select a Wix Site you want to intergarte Velo into today.
 

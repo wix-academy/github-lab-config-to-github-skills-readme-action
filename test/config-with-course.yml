@@ -3,6 +3,8 @@ description: Velo is a full-stack development platform that empowers you to rapi
 steps:
   - course: wix-academy/welcome-to-wix-engineering-path
     description: course description
+  - course: welcome-to-wix-engineering-path
+    description: course description 2 
   - course: wix-academy/welcome-to-wix-engineering-path
   - course: wix-academy/welcome-to-wix-engineering-path
     title: Welcome to Wix Engineering 2

@@ -68,7 +68,10 @@ function isPathtoRelativeMdFile(path) {
 
 async function fetchCourseDetails(course, {octokit, reporter}) {
     let [owner, repo] = course.split('/');
-    owner ||= process.env.GITHUB_REPOSITORY_OWNER;
+    if (!repo) {
+        repo =  course;
+        owner = process.env.GITHUB_REPOSITORY_OWNER;
+    }
     
     try {
         const courseConfigResponse = await octokit.rest.repos.getContent({
