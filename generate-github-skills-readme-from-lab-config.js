@@ -32,6 +32,7 @@ function extractYTVidfromUrl(videoUrl) {
 
 function stepTemplate(index, stepsCount, title, description, video, link, {
     mdFileContent,
+    courseStep,
     noLink
 }) {
     const stepTitle = `${(index + 1).toString().padStart(2, '0')} - ${title}`;
@@ -39,7 +40,7 @@ function stepTemplate(index, stepsCount, title, description, video, link, {
 
     return `
 <details id=${index === stepsCount - 1 ? 'X' : index} ${index === 0 ? 'open' : ''}>
-<summary><h2>${stepTitle}</h2></summary>
+<summary><h2>${courseStep ? 'COURSE: ' : ''}${stepTitle}</h2></summary>
 
 ${description}
 
@@ -60,7 +61,7 @@ function isPathtoRelativeMdFile(path) {
 }
 
 async function fetchCourseDetails(course, {octokit, reporter}) {
-    const [owner, repo] = course.split('/');
+    let [owner, repo] = course.split('/');
     owner ||= process.env.GITHUB_REPOSITORY_OWNER;
     
     try {
@@ -134,7 +135,7 @@ async function generateReadmeFromConfig(
 
         // TODO: YouTube thumbnail fetcher
 
-        return {...step, index, mdFileContent, noLink: (inlineMDlinks || inlineMDlink)}
+        return {...step, index, mdFileContent, courseStep, noLink: (inlineMDlinks || inlineMDlink)}
     }))
     labConfigSteps.sort((a, b) => a.index - b.index);
 
