@@ -59,17 +59,42 @@ function isPathtoRelativeMdFile(path) {
     return path.endsWith('.md') && !path.startsWith('https://') && RegExp('(./)?[a-zA-Z0-9/]*.md').test(path)
 }
 
+async function fetchCourseDetails(course, {octokit, reporter}) {
+    const [owner, repo] = course.split('/');
+    owner ||= process.env.GITHUB_REPOSITORY_OWNER;
+    
+    try {
+        const courseConfigResponse = await octokit.rest.repos.getContent({
+            owner,
+            repo,
+            path: 'config.yml'
+        });
+        
+        const courseConfig =  parse(Buffer.from(courseConfigResponse.data.content, 'base64').toString());
+
+        const link = `${process.env.GITHUB_SERVER_URL}/${owner}/${repo}`;
+        const title = courseConfig.title;
+        const description = courseConfig.description;
+        
+        return { link, title, description };
+    } catch (error) {
+        reporter.info(`failed to fetch course details for ${course}`)
+        reporter.error(error);
+        return null;
+    }
+}
+
 async function generateReadmeFromConfig(
     configPath='config.yml', 
     courseDetailsPath='course-details.md', 
     readmePath='./README.md',
     rootPath='./',
-    consoleErr = console.error, 
+    octokit = null,
+    reporter = console, 
     // ADDON: Options
     {
         inlineMDlinks
     } = {}) {
-        console.log('root:', rootPath);
     configPath = path.resolve(rootPath, configPath);
     courseDetailsPath = path.resolve(rootPath, courseDetailsPath);
     readmePath = path.resolve(rootPath, readmePath);
@@ -85,13 +110,29 @@ async function generateReadmeFromConfig(
     let labConfigSteps = labConfig.steps; 
     // ADDON: files & inline md links
     labConfigSteps = await Promise.all(labConfigSteps.map(async (step, index) => {
-        const { link, file, inlineMDlink } = step;
+        const { link, file, course, inlineMDlink } = step;
         
         let mdFileContent = null;
-        if (((inlineMDlinks || inlineMDlink) && (link && isPathtoRelativeMdFile(link))) || file) {
-            const filePath = file || (inlineMDlinks || inlineMDlink) && link;
-            mdFileContent = await fs.readFile(path.resolve(rootPath, filePath), 'utf8');
+        let courseStep = false;
+        if (course) {
+            const courseDetails = await fetchCourseDetails(course, { octokit, reporter });
+            if (courseDetails) {
+                const { link: courseLink, title: courseTitle, description: courseDescription } = courseDetails;
+                
+                step.link ||= courseLink;
+                step.title ||= courseTitle;
+                step.description ||= courseDescription;
+
+                courseStep = true;
+            }
+        } else {    
+            if (((inlineMDlinks || inlineMDlink) && (link && isPathtoRelativeMdFile(link))) || file) {
+                const filePath = file || (inlineMDlinks || inlineMDlink) && link;
+                mdFileContent = await fs.readFile(path.resolve(rootPath, filePath), 'utf8');
+            }
         }
+
+        // TODO: YouTube thumbnail fetcher
 
         return {...step, index, mdFileContent, noLink: (inlineMDlinks || inlineMDlink)}
     }))
@@ -114,9 +155,10 @@ async function generateReadmeFromConfig(
         await fs.writeFile(readmePath, _readmeTemplate)
         return _readmeTemplate;
     } catch (error) {
-        consoleErr('README.md GitHub Skill format file creating error: ', error);
+        reporter.error('README.md GitHub Skill format file creating error: ', error);
         throw error;
     }
+
 }
 
 

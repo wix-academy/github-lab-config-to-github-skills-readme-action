@@ -1,4 +1,7 @@
 const core = require('@actions/core');
+const { Octokit } = require("@octokit/action");
+const octokit = new Octokit();
+
 const { generateReadmeFromConfig } = require('./generate-github-skills-readme-from-lab-config');
 
 async function run() {
@@ -11,7 +14,7 @@ async function run() {
 
     core.info(`Generating in ${rootPath}: ${readmePath} from ${configPath}, ${courseDetailsPath} ...`);
 
-    const readmeContent = await generateReadmeFromConfig(configPath, courseDetailsPath, readmePath, rootPath, core.error, {
+    const readmeContent = await generateReadmeFromConfig(configPath, courseDetailsPath, readmePath, rootPath, octokit, core, {
       inlineMDlinks
     });
 

@@ -1,5 +1,6 @@
 const process = require("process");
 const cp = require("child_process");
+const { Octokit } = require("octokit");
 
 const itif = (condition) => condition ? it : it.skip;
 const itSkipInCI = itif(!process.env['CI'])
@@ -42,6 +43,22 @@ test('generate readme with metadata', async () => {
   expect(readmeWithMetadata).toMatchSnapshot(); 
 })
 
+// For running this test you should set GITHUB_TOKEN ENV Variable on your machine/CI e.g., in ~/.zshrc
+test('generate readme with course', async () => {
+  process.env.GITHUB_SERVER_URL = 'https://github.com'
+  process.env.GITHUB_REPOSITORY_OWNER = 'wix-academy'
+  const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+  const readmeWithCourse = await generateReadmeFromConfig(
+    "config-with-course.yml",
+    "course-details.md",
+    "out/readme-with-course.md",
+    "test/",
+    octokit
+  );
+
+  expect(readmeWithCourse).toMatchSnapshot(); 
+})
+
 test('extractYTVidfromUrl', () => {
   expect(extractYTVidfromUrl('https://www.youtube.com/embed/ISAplsTsIOE')).toBe('ISAplsTsIOE')
   expect(extractYTVidfromUrl('https://www.youtube.com/embed/ISAplsTsIOE/')).toBe('ISAplsTsIOE')
@@ -57,6 +74,7 @@ itSkipInCI("test runs", () => {
   process.env["INPUT_README-FILE"] = "test/out/readme.md";
   process.env["INPUT_INLINE-MARKDOWN-LINKS"] = "false";
   process.env["INPUT_ROOT-PATH"] = "./"; 
+  process.env["GITHUB_ACTION"] = '1';
   const result = cp.execSync(`node index.js`, { env: process.env }).toString();
   console.log(result);
 });
@@ -98,12 +116,16 @@ describe("Addon", () => {
     });
 
     describeSkipInCI("test runs", () => {
-      test("with files with inline links", () => {
+      beforeEach(()=>{
         process.env["INPUT_CONFIG-FILE"] = "config-with-files.yml";
         process.env["INPUT_COURSE-DETAILS-FILE"] = "course-details.md";
+        process.env["INPUT_ROOT-PATH"] = "./test";
+        process.env["GITHUB_ACTION"] = '1';
+      })
+      test("with files with inline links", () => {
         process.env["INPUT_README-FILE"] = "out/readme-with-files-inline-links.md";
-        process.env["INPUT_INLINE-MARKDOWN-LINKS"] = "true";
-        process.env["INPUT_ROOT-PATH"] = "./test"; 
+        process.env["INPUT_INLINE-MARKDOWN-LINKS"] = "true"; 
+        
         const result = cp
           .execSync(`node index.js`, { env: process.env })
           .toString();
@@ -111,11 +133,9 @@ describe("Addon", () => {
       });
   
       test("with files no inline links", () => {
-        process.env["INPUT_CONFIG-FILE"] = "config-with-files.yml";
-        process.env["INPUT_COURSE-DETAILS-FILE"] = "course-details.md";
         process.env["INPUT_README-FILE"] = "out/readme-with-files-no-inline-links.md";
         process.env["INPUT_INLINE-MARKDOWN-LINKS"] = "false";
-        process.env["INPUT_ROOT-PATH"] = "./test"; 
+        
         const result = cp
           .execSync(`node index.js`, { env: process.env })
           .toString();

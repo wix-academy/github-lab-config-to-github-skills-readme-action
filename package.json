@@ -1,7 +1,7 @@
 {
-  "name": "javascript-action",
+  "name": "action-migrate-github-lab-to-github-skills",
   "version": "1.0.0",
-  "description": "JavaScript Action Template",
+  "description": "GitHub Action transform GitHub lab to GitHub skills format",
   "main": "index.js",
   "scripts": {
     "lint": "eslint .",
@@ -27,11 +27,13 @@
   "homepage": "https://github.com/actions/javascript-action#readme",
   "dependencies": {
     "@actions/core": "^1.2.5",
+    "@octokit/action": "^4.0.10",
     "yaml": "^2.1.1"
   },
   "devDependencies": {
     "@vercel/ncc": "^0.34.0",
     "eslint": "^8.0.0",
-    "jest": "^27.2.5"
+    "jest": "^27.2.5",
+    "octokit": "^2.0.10"
   }
 }
