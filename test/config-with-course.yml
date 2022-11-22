@@ -1,6 +1,7 @@
 title: Learn Velo
 description: Velo is a full-stack development platform that empowers you to rapidly build, manage and deploy professional web apps.
 steps:
+  - course: deep-dive-into-distributed-query-engines
   - course: wix-academy/welcome-to-wix-engineering-path
     description: course description
   - course: welcome-to-wix-engineering-path
